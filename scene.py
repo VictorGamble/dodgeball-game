@@ -12,6 +12,7 @@ from pygame.locals import (
     K_RIGHT,
     K_ESCAPE,
     KEYDOWN,
+    K_SPACE,
     QUIT,
 )
 
