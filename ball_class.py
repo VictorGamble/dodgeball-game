@@ -53,10 +53,20 @@ class Ball(pygame.sprite.Sprite):
 
     def update(self):
             # any code here will happen every time the game loop updates
-        
+        if self.rect.centerx > WIDTH:
+            self.kill()
+            new_ball()
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_SPACE]:
             self.rect.x -= self.speedx
+
+def new_ball():
+    b = Ball()
+    all_balls.add(b)
+    all_sprites.add(b)
+        
+    
+
         
 
     
@@ -96,10 +106,14 @@ clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 all_balls = pygame.sprite.Group()
 ball1 = Ball()
-player = Player()
+# player = Player()
 all_balls.add(ball1)
 all_sprites.add(ball1)
-all_sprites.add(player)
+# all_sprites.add(player)
+
+for i in range(1):
+    new_ball()
+
 # Game loop
 running = True
 while running:
@@ -110,9 +124,9 @@ while running:
         # check for closing window
         if event.type == pygame.QUIT:
             running = False
-        # if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_SPACE:
-        #         ball1.shoot()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                new_ball()
         
     
 
@@ -120,10 +134,10 @@ while running:
     # Update
     all_sprites.update()
     # check for collisions
-    hits = pygame.sprite.spritecollide(player, all_balls, True)
-    if hits:
-        # running = False
-        print("hits")
+    # hits = pygame.sprite.spritecollide(player, all_balls, True)
+    # if hits:
+    #     # running = False
+    #     print("hits")
         
     
 
